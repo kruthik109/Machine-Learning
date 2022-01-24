@@ -1,7 +1,3 @@
-##############
-# Name: Kruthi Krishnappa
-# email: krish109@purdue.edu
-# Date: 10/12/2020
 
 
 import pandas as pd
