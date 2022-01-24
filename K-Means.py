@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[17]:
 
 
 import pandas as pd
@@ -14,10 +10,6 @@ totalTD = data['Total Discharges']
 avgCC = data['Average Covered Charges']
 avgTP = data['Average Total Payments']
 avgMP = data['Average Medicare Payments']
-
-
-# In[18]:
-
 
 #1.1a
 uniProvID = data['Provider Id'].unique()
@@ -60,19 +52,7 @@ v = data['DRG Definition'][data['Total Discharges'].idxmin()]
 print("Least amount of discharges:", v, "at", mini, "discharges")
 
 
-# In[19]:
-
-
 #1.2 See R studio
-
-
-# In[ ]:
-
-
-
-
-
-# In[64]:
 
 
 #2.1
@@ -111,10 +91,6 @@ newData.insert(0, 'Prov.Id',finalUniProv)
 newData.insert(1, 'Prov. State', state)
 print(drgs)
 
-
-# In[41]:
-
-
 #2.2
 import numpy as np
 count = 0
@@ -140,8 +116,6 @@ for i in drgs:
 print(newData)
 
 
-# In[49]:
-
 
 #2.3 
 #You can either input values for the missing data or you can delete the missing values in the data
@@ -149,9 +123,6 @@ print(newData)
 i = newData.iloc[:,2:]
 h = i.dropna()
 v = h.iloc[:,2:].corr()
-
-
-# In[61]:
 
 
 #3.1
@@ -184,9 +155,6 @@ for row in corrMat:
 print(corrMat)
 
 
-# In[57]:
-
-
 #3.1a
 #high positive association
 droppednan.plot.scatter(x='DRG Charges 066', y ='DRG Charges 065') #Slope = 1.2
@@ -195,9 +163,6 @@ droppednan.plot.scatter(x='DRG Charges 193', y ='DRG Charges 871') #slpoe = 1.3
 #low postive asscocation
 droppednan.plot.scatter(x='DRG Charges 483', y ='DRG Charges 100') #Slope = 1.2
 droppednan.plot.scatter(x='DRG Charges 483', y ='DRG Charges 918') #slpoe = 1.3
-
-
-# In[58]:
 
 
 #3.1b
@@ -210,9 +175,6 @@ print("Correlation between DRG Charges 066 and 065:", corr1)
 print("Correlation between DRG Charges 193 and 871:", corr2)
 print("Correlation between DRG Charges 483 and 100:", corr3)
 print("Correlation between DRG Charges 483 and 918:", corr4)
-
-
-# In[60]:
 
 
 #3.2a
@@ -253,9 +215,6 @@ newDF = pd.concat([AL2, CT2, MI2, FL2, NY2, TX2])
 print(newDF.boxplot(column = 'DRG Charges 313', by='Prov. State'))
 
 
-# In[62]:
-
-
 from scipy import stats
 #3.2b
 #H0: CT and MI have the same means for DRG Charges 313.
@@ -266,9 +225,6 @@ t,p = stats.ttest_rel(CT2['DRG Charges 313'], MI2['DRG Charges 313'])
 print('test statistic', t, 'p-value',p)
 
 print('p=',p , '> alpha = .05 therefore we fail to reject the null hypothesis that CT and MI have the same means for DRG Charges 313 ')
-
-
-# In[63]:
 
 
 from scipy import stats
@@ -304,9 +260,6 @@ t,p = stats.ttest_ind(TXlis, NYlis)
 print('test statistic', t, 'p-value',p)
 print('p=',p , '> alpha = .05 therefore we fail to reject the null hypothesis that  The mean of NY is greater than TX for DRG Charges 313, 039 and 101.')
 print("The test statistics and the p values changed slightly but the result was significantly different beacuse I used .05 as alpha and my p was less than alpha for my paried test but for unpaired it slightly greater than alpha so it chaged the end result")
-
-
-# In[ ]:
 
 
 
